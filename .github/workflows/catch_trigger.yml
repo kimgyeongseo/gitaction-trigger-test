@@ -17,13 +17,9 @@ jobs:
           token: ${{ secrets.ACCESS_TOKEN }}
           fetch-depth: 0
           submodules: true
-      - name: Readme Download Button Action
-        env:
-          REPO: "gitaction-trigger-test"
-          COLOR: "black"
+      - name: Update submodules
         run: |
-          UPDATE=$(cat README.md | perl -0777 -pe 's#(${env.REPO})')
-          echo "${UPDATE}" > README.md
+          git submodule update --remote --recursive
       - name: Setup git config
         run: |
           git config user.name "github-actions[bot]"
